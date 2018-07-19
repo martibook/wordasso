@@ -50,14 +50,14 @@ return related words which sound like the key word most, default list size is 10
 ```
 
 ### ent_words
-return related words which have Named Entiy in their definitions
+return Named Entities associated to the related words of the given word.
 
 ```
 >>> from wordasso.wordasso import ent_words
 >>> print(ent_words("author"))
 
 # output
-['book', 'creator', 'zola', 'settlor', 'maker']
+{French, Judeo, Christian, Islam, trustee, Medina, trustee, Judeo, Mecca, Muhammad}
 ```
 
 
