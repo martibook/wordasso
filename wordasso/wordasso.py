@@ -39,26 +39,27 @@ def contain_ne(word):
     query synsets in Wordnet for the given word, achieve definition sentence of each synset
     if any definition sentence contains Named Entity, then this given word is related with Named Entity
     :param word: the given word
-    :return: True of False
+    :return: set of Named Entity related to the given word
     """
     synsets = wn.synsets(word)
+    nes = set()
     for syn in synsets:
         def_sentence = syn.definition()
         doc = nlp(def_sentence)
-        named_ents = [ent for ent in doc.ents if ent.label_ in NE_TYPES]
-        if len(named_ents) > 0:
-            return True
-    else:
-        return False
+        named_ents = set(ent for ent in doc.ents if ent.label_ in NE_TYPES)
+        nes |= named_ents
+    return nes
 
 
 def ent_words(word):
     """
-    query means like words of the key word from datamuse API, then return those words which are named entities
+    query means like words of the key word from datamuse API, then return Named Entities related to queried words
     :param word: the key word
-    :return:
+    :return: set of Named Entities
     """
     r = requests.get(ml_url.format(w=word))
     ml_words = [item["word"] for item in r.json()]
-    contain_ne_words = [w for w in ml_words if contain_ne(w)]
-    return contain_ne_words
+    nes = set()
+    for w in ml_words:
+        nes |= contain_ne(w)
+    return nes

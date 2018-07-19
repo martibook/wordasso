@@ -12,7 +12,7 @@ install_reqs = [line.strip() for line in local_file('requirements.txt').readline
 
 setuptools.setup(
     name="wordasso",
-    version="0.1.1",
+    version="0.2.1",
     author="Author",
     author_email="martibook@outlook.com",
     description="Several word association function based on datamuse API",

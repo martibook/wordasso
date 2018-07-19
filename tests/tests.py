@@ -36,10 +36,10 @@ def test_ent_words():
             for row in reader:
                 w = row[0]
                 print("word: ", w)
-                print("containing-named-entity related words:")
+                print("Named Entities related to the words:")
                 print(ent_words(w))
                 print("-" * 60)
 
 
 if __name__ == '__main__':
-    test_pho_words()
+    pass
